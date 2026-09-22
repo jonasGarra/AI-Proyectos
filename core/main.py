@@ -16,7 +16,7 @@ app = FastAPI(title="Kikos AI Core", version="0.1.0")
 
 class RouteRequest(BaseModel):
     prompt: str
-    task_type: str = "general"
+    task_type: str = "auto"
 
 @app.get("/health")
 def health(settings: Settings = Depends(get_settings)):
@@ -31,6 +31,6 @@ def health(settings: Settings = Depends(get_settings)):
 def route_prompt(req: RouteRequest, router: SmartRouter = Depends(get_router)):
     selected_model = router.route(req.prompt, req.task_type)
     return {
-        "task_type": req.task_type,
+        "prompt": req.prompt,
         "selected_model": selected_model
     }
