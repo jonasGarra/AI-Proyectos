@@ -1,0 +1,11 @@
+services:
+  omniroute:
+    image: ghcr.io/ry-ops/omniroute:latest
+    container_name: kikos_omniroute
+    restart: unless-stopped
+    ports:
+      - "8001:8000"  # OmniRoute escuchará en el puerto 8001
+    env_file:
+      - .env
+    volumes:
+      - ./data/omniroute:/app/data
