@@ -1,27 +1,9 @@
-# Secrets
-.env
-.env.*
-!.env.example
-
-# Runtime data
-data/*
-logs/*
-backups/*
-
-# Python
-__pycache__/
-*.py[cod]
 .venv/
-venv/
-
-# Node
-node_modules/
-dist/
-
-# IDE
-.idea/
-.vscode/
-
-# OS
+.env
+data/
+logs/
+core/memory/workspaces/
+*.db
+__pycache__/
+*.pyc
 .DS_Store
-Thumbs.db

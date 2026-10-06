@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kikos AI</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237b1e32'/%3E%3Cpath d='M16 7l2.2 6.8L25 16l-6.8 2.2L16 25l-2.2-6.8L7 16l6.8-2.2z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- Fondo oscuro que aparece detrás de la barra lateral en el móvil -->
+    <div class="fondo-oscuro" id="fondoOscuro"></div>
+
+    <!-- ============ BARRA LATERAL ============ -->
+    <aside class="barra" id="barraLateral" aria-label="Proyectos">
+
+      <div class="barra-cabecera">
+        <div class="marca">
+          <span class="logo" data-icon="sparkles" data-size="18"></span>
+          <span class="marca-nombre">Kikos <span class="marca-ai">AI</span></span>
+        </div>
+        <div class="barra-botones">
+          <button type="button" class="btn-icono" id="btnBuscar" title="Buscar proyecto" aria-label="Buscar proyecto" aria-expanded="false" data-icon="search"></button>
+          <button type="button" class="btn-icono" id="btnOcultar" title="Ocultar barra lateral" aria-label="Ocultar barra lateral" data-icon="panelLeft"></button>
+        </div>
+      </div>
+
+      <div class="caja-busqueda" id="cajaBusqueda" hidden>
+        <input type="search" id="inputBusqueda" placeholder="Buscar proyecto o subproyecto" aria-label="Buscar proyecto o subproyecto" autocomplete="off">
+      </div>
+
+      <button type="button" class="btn-nuevo-proyecto" id="btnNuevoProyecto">
+        <span data-icon="plus" data-size="18"></span>
+        Nuevo proyecto
+      </button>
+
+      <nav class="lista-proyectos" id="listaProyectos"></nav>
+    </aside>
+
+    <!-- ============ ZONA PRINCIPAL ============ -->
+    <main class="principal">
+
+      <header class="cabecera">
+        <button type="button" class="btn-icono" id="btnMostrar" title="Mostrar barra lateral" aria-label="Mostrar barra lateral" data-icon="panelLeft"></button>
+        <div class="ruta" id="rutaActual"></div>
+      </header>
+
+      <section class="zona-chat" id="zonaChat">
+        <div class="mensajes" id="mensajes" role="log" aria-live="polite"></div>
+      </section>
+
+      <div class="compositor-fondo">
+        <form class="compositor" id="formulario" autocomplete="off">
+
+          <div class="adjuntos" id="adjuntos"></div>
+
+          <textarea id="texto" rows="1" placeholder="Escribe tu pregunta a Kikos AI" aria-label="Escribe tu pregunta"></textarea>
+
+          <div class="compositor-fila">
+            <div class="compositor-izq">
+              <button type="button" class="btn-icono" id="btnAdjuntar" title="Adjuntar archivos" aria-label="Adjuntar archivos" data-icon="paperclip"></button>
+              <input type="file" id="inputArchivos" multiple hidden>
+
+              <div class="selector-modelo">
+                <button type="button" class="btn-modelo" id="btnModelo" aria-haspopup="listbox" aria-expanded="false" title="Elegir modelo">
+                  <span id="iconoModelo"></span>
+                  <span id="etiquetaModelo">Rápido</span>
+                  <span data-icon="chevronDown" data-size="14"></span>
+                </button>
+                <div class="menu-modelo" id="menuModelo" role="listbox" aria-label="Modelo" hidden></div>
+              </div>
+            </div>
+
+            <div class="compositor-der">
+              <button type="button" class="btn-icono" id="btnMicrofono" title="Dictar con el micrófono" aria-label="Dictar con el micrófono" aria-pressed="false" data-icon="mic"></button>
+              <button type="submit" class="btn-enviar" id="btnEnviar" title="Enviar" aria-label="Enviar" data-icon="arrowUp" disabled></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- ============ VENTANA EMERGENTE (crear, editar, eliminar) ============ -->
+  <div class="modal-fondo" id="modalFondo" hidden>
+    <form class="modal" id="modalForm" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <h2 id="modalTitulo"></h2>
+      <p class="modal-texto" id="modalTexto"></p>
+      <div class="modal-campo" id="modalCampo">
+        <label for="modalInput" id="modalEtiqueta"></label>
+        <input type="text" id="modalInput" maxlength="40" autocomplete="off">
+        <p class="modal-error" id="modalError" role="alert"></p>
+      </div>
+      <div class="modal-botones">
+        <button type="button" class="btn btn-secundario" id="modalCancelar">Cancelar</button>
+        <button type="submit" class="btn btn-primario" id="modalAceptar">Aceptar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Aviso pequeño que aparece abajo -->
+  <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
